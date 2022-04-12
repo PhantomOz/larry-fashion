@@ -11,7 +11,7 @@
 <body>
     <div class="container" id="container">
         <div class="card-show">
-            <p>1 item has been added </p>
+            <p><span id="item-count">0</span> item has been added </p>
         </div>
             <header id="header" class="header">
                 <div class="logo">
@@ -398,15 +398,15 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <!-- <tr>
                     <td><input type="checkbox" class="checkbox" ></td>
                     <td class="img-box"><img src="./images/0c1d4f2fd3e43e0de96c199dc480ebd4.jpg" width="40" alt=""></td>
                     <td><h3 class="item-name">Strawberry cake</h3></td>
                     <td class="item-price"><h3>$100</h3></td>
-                    <td><input type="number" value="1" class="num" id=""></td>
+                    <td><input type="number" value="1" class="num" id="" onchange="updateTotal(this)"></td>
                     <td class="total-price">$100</td>
-                    <td><button class="remove-btn" type="button">$100</button></td>
-                </tr>
+                    <td><button class="remove-btn" type="button" id="remove">Remove</button></td>
+                </tr> -->
             </tbody>
         </table>
 

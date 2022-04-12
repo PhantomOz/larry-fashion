@@ -2,13 +2,15 @@
 const maincontainer = document.getElementsByTagName('tbody')[0]
 const addBtns = document.querySelectorAll('.add-btn')
 const quantity_field = document.querySelectorAll('.num')
+let itemCount = document.querySelector("span#item-count");
 
 addBtns.forEach(addBtn => {
    addBtn.addEventListener('click',addCart)
 })
 
+
+
 function addCart(e) {
-      
       const parentImg = e.target.parentElement
       // new image
       const newImg = parentImg.children[0].src;
@@ -23,26 +25,28 @@ function addCart(e) {
                     <td><input type="checkbox" class="checkbox" ></td>
                     <td class="img-box"><img src="${newImg}" width="40" alt=""></td>
                     <td><h3 class="item-name">${itemName}</h3></td>
-                    <td class="item-price"><h3>${itemPrice}</h3></td>
-                    <td><input type="number" value="1" class="num" id=""></td>
-                    <td class="total-price">${itemPrice}</td>
-                    <td><button class="remove-btn" type="button">$100</button></td>
+                    <td class="item-price"><h3 id="price">$${itemPrice}</h3></td>
+                    <td><input type="number" min="1" value="1" onchange="updateTotal(this)" class="num" id=""></td>
+                    <td class="total-price" id="total">$${itemPrice}</td>
+                    <td><button class="remove-btn" type="button" id="remove" onclick="removeItem(this)">Remove</button></td>
                 
                         `;
     maincontainer.append(itemsContainer);
-    
-  quantity_field.forEach(quantity => {
-        quantity.addEventListener('change', upDateTotal )
-    })
-  
+    const addItem = parseInt(itemCount.textContent) + 1;
+    itemCount.textContent = addItem;
 }
-  function upDateTotal(e) {
-     number_of_items = e.target
-     number_of_items_parent = number_of_items.parentElement.parentElement;
-     price_field = number_of_items_parent.getElementsByClassName('item-price')[0]
-     total_field = number_of_items_parent.getElementsByClassName('total-price')[0]
-     price_field_content = price_field.children[0].innerText
-    console.log()
+  function updateTotal(ele) {
+    const {value, parentElement} = ele;
+    const price = parentElement.parentElement.querySelector("#price").textContent;
+    const total = value * price.substr(1, price.length);
+    parentElement.parentElement.querySelector("#total").textContent = `$${total}`;
+  }
+
+  function removeItem(ele) {
+    const {parentElement} = ele;
+    parentElement.parentElement.remove();
+    const subItem = parseInt(itemCount.textContent) - 1;
+    itemCount.textContent = subItem;
   }
         
 
